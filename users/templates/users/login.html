@@ -1,13 +1,22 @@
 {% extends "blogs/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center align-item-center mb-3">
+        <div class="col-md-10  mt-3 text-center ">
+            <div class="card text-center">
+                <div class="card-body bg-info p-2">
+                  <h5 class="card-title">Welcome To BLog Application</h5>
+                  <p class="card-title">Please Enter Your Log In Credential</p>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
 <div class="content-section">
     <form action="" method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">
-                Log In
-            </legend>
             {{ form|crispy }}
         </fieldset>
         <div class="form-group">

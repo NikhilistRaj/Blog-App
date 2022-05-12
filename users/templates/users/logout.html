@@ -1,11 +1,20 @@
 {% extends "blogs/base.html" %}
 {% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center align-item-center mb-3">
+        <div class="col-md-10  mt-3 text-center ">
+            <div class="card text-center">
+                <div class="card-body bg-info p-2">
+                  <h5 class="card-title">You have been logged out successfully.</h5>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
 <div class="content-section">
-    <h2> You have been logged out successfully.</h2>
-
-    <div class="border-top pt-3">
+    <div class="border-top text-center pt-3">
         <small class="text-muted">
-            <a href="{% url 'login' %}" class="ml-2">Back to Login</a>
+            <a href="{% url 'login' %}" class="ml-2 btn btn-warning">Back to Login</a>
         </small>
     </div>
 </div>

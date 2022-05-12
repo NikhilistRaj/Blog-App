@@ -1,12 +1,22 @@
 {% extends "blogs/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center align-item-center mb-3">
+        <div class="col-md-10  mt-3 text-center ">
+            <div class="card text-center">
+                <div class="card-body bg-info p-2">
+                  <h5 class="card-title">Fill The Following Details</h5>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
 <div class="content-section">
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">
-                Create Post
             </legend>
             {{ form.media }}
             {{ form|crispy }}

@@ -1,20 +1,47 @@
 {% extends "blogs/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="content-section">
-    <div class="profile_pane border flex">
-        <img class="rounded-circle border" src="{{ user.profile.profile_pic.url }}" alt="profile_image" height="120px"
-            width="120px">
-        <div style="margin: 10px;">
-            <h2>{{ user.username }}</h2>
-            <small>{{ user.email }}</small>
+    <div class="row py-5 px-4">
+        <div class="col-md-10 mx-auto">
+            <!-- Profile widget -->
+            <div class="bg-white shadow rounded overflow-hidden">
+                <div class="px-4 pt-0 pb-4 cover">
+                    <div class="media align-items-end profile-head">
+                        <div class="profile mr-3">
+                            <img src="{{ user.profile.profile_pic.url }}"
+                                 alt="..."
+                                 width="130"
+                                 class="rounded mb-2 img-thumbnail">
+                            {% if user == curr_user %}     
+                                <a href="{% url 'update_profile' %}" class="btn btn-outline-dark btn-sm btn-block">Edit profile</a>
+                            {%endif%}
+                        </div>
+                        <div class="media-body mb-5 text-white">
+                            <h4 class="mt-0 mb-0">{{ user.username }}</h4>
+                            <p class="small mb-4">
+                                <i class="fas fa-at"></i> {{ user.email }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
+    <div class="row py-3 px-4">
+        <div class="col-md-10 mx-auto">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">
-                Update Profile
+                <div class="row justify-content-center align-item-center mb-3">
+                    <div class="col-md-12 text-center ">
+                        <div class="card text-center">
+                            <div class="card-body bg-info p-2">
+                              <h5 class="card-title">Fill Follwoing Details To Update Profile</h5>
+                            </div>
+                          </div>
+                    </div>
+                </div>
             </legend>
             {{ u_form|crispy }}
             {{ p_form|crispy }}
@@ -24,5 +51,6 @@
             <a href="{% url 'profile' request.user.username %}" class="btn btn-outline-danger ml-3">Cancel</a>
         </div>
     </form>
-</div>
+        </div>   
+    </div>   
 {% endblock content %}

@@ -14,7 +14,7 @@ body {
 }
 
 .navbar {
-    background-color: black;
+    background-color: #251D3A;
     height: 4.5rem;
 }
 
@@ -72,25 +72,27 @@ body {
     padding-left: 0.5em;
     /*background-color: #edf2f8;*/
     padding: 10px;
-    box-shadow: 3px 3px rgb(214, 214, 214);
+    box-shadow: 3px 3px 3px 3px rgb(214, 214, 214);
 }
 
 .side_container li {
     margin-left: 1em;
     list-style-position: outside;
-    list-style-type: none;
+    list-style-type:circle;
     font-weight: 500;
     border-bottom: 1px solid #eaeae9f0;
     padding: 2px;
 }
-
 .side_container p {
-    font-weight: bold;
+    font-weight:normal;
     font-size: 1.4rem;
     /*color: rgb(70 6 247 / 88%);*/
     color: white;
-    background-color: black;
+    background-color: #E04D01;
     text-align: center;
+    border-radius: .5rem;
+    padding-right: 5px;
+    padding-left: 5px;
 }
 
 .navbar a {
@@ -453,7 +455,7 @@ hr {
 .post_div {
     display: flex;
     flex-direction: row;
-    background-color: #5d0303;
+    background-color: #E04D01;
     color: white;
     padding: 5px 0;
 }
@@ -958,4 +960,15 @@ hr {
     div#search_user_part {
         display: none;
     }
+}
+
+/*--------------------*/
+.profile-head {
+    transform: translateY(5rem)
+}
+
+.cover {
+    background-image: url(https://images.unsplash.com/photo-1530305408560-82d13781b33a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80);
+    background-size: cover;
+    background-repeat: no-repeat
 }

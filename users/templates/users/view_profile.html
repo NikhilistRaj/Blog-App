@@ -1,38 +1,122 @@
 {% extends "blogs/base.html" %}
 {% load set_key %}
 {% block content %}
-<div class="content-section">
-    <div class="profile_pane flex border">
-        <img class="media rounded-circle" src="{{ curr_user.profile.profile_pic.url }}" alt="profile_image"
-            height="150px" width="150px">
-        <div class="profile_container">
-            <h2 class="username_field">{{ curr_user.username }}</h2>
-            {% if user != curr_user %}
-                {% if not followers|set_key:user.username %}
-                    <button class="follow-btn follow"><i class="fas fa-plus"></i>&nbsp;Follow</button>
+    <div class="content-section d-none">
+        <div class="profile_pane flex border">
+            <img class="media rounded-circle"
+                 src="{{ curr_user.profile.profile_pic.url }}"
+                 alt="profile_image"
+                 height="150px"
+                 width="150px">
+            <div class="profile_container">
+                <h2 class="username_field">{{ curr_user.username }}</h2>
+                {% if user != curr_user %}
+                    {% if not followers|set_key:user.username %}
+                        <button class="follow-btn follow">
+                            <i class="fas fa-plus"></i>&nbsp;Follow
+                        </button>
+                    {% else %}
+                        <button class="following-btn follow">
+                            <i class="fas fa-check-circle"></i>&nbsp;Following
+                        </button>
+                    {% endif %}
                 {% else %}
-                    <button class="following-btn follow"><i class="fas fa-check-circle"></i>&nbsp;Following</button>
+                    <small>{{ user.email }}</small>
+                    <br>
+                    <a href="{% url 'update_profile' %}">
+                        <small>Edit Profile</small>
+                    </a>
                 {% endif %}
-            {% else %}
-            <small>{{ user.email }}</small>
-            <br>
-            <a href="{% url 'update_profile' %}"><small>Edit Profile</small></a>
-            {% endif %}
-            <div class="followers_section mt-2" title="View connections">
-                <a class="view_followers" href="{% url 'view_followers' curr_user %}"><small><i class="fas fa-users"></i>&nbsp;<b>{{ no_of_followers }}</b> follower{{ no_of_followers|pluralize }}</small>&nbsp;<small>| <b>{{ no_of_following }}</b>
-                    following</small></a>
-                
-                </div>
-
+                <div class="followers_section mt-2" title="View connections">
+                    <a class="view_followers" href="{% url 'view_followers' curr_user %}">
+                        <small><i class="fas fa-users"></i>&nbsp;<b>{{ no_of_followers }}</b> follower{{ no_of_followers|pluralize }}</small>&nbsp;<small>| <b>{{ no_of_following }}</b>
+                    following</small>
+                </a>
+            </div>
         </div>
     </div>
     <div class="posts_container border">
         <h5>Posts</h5>
         <ul class="list-group list-group-flush">
             {% for blog in user_blogs %}
-            <li><a href="{% url 'view_post' blog.pk blog.slug %}">{{ blog.title }}</a></li>
+                <li>
+                    <a href="{% url 'view_post' blog.pk blog.slug %}">{{ blog.title }}</a>
+                </li>
             {% endfor %}
         </ul>
+    </div>
+</div>
+<div class="row py-5 px-4">
+    <div class="col-md-10 mx-auto">
+        <!-- Profile widget -->
+        <div class="bg-white shadow rounded overflow-hidden">
+            <div class="px-4 pt-0 pb-4 cover">
+                <div class="media align-items-end profile-head">
+                    <div class="profile mr-3">
+                        <img src="{{ curr_user.profile.profile_pic.url }}"alt="..."width="130"class="rounded mb-2 img-thumbnail">
+                        {% if user == curr_user %}
+                            <a href="{% url 'update_profile' %}"
+                               class="btn btn-outline-dark btn-sm btn-block">Edit profile</a>
+                        {% endif %}
+                    </div>
+                    <div class="media-body mb-5 text-white">
+                        <h4 class="mt-0 mb-0">{{ curr_user.username }}</h4>
+                        <p class="small mb-4">
+                            <i class="fas fa-at"></i> {{ curr_user.email }}
+                        </p>
+                    </div>
+                    {% if user != curr_user %}
+                            {% if not followers|set_key:user.username %}
+                                <button class="follow-btn follow">
+                                    <i class="fas fa-plus"></i>&nbsp;Follow
+                                </button>
+                            {% else %}
+                                <button class="following-btn follow">
+                                    <i class="fas fa-check-circle"></i>&nbsp;Following
+                                </button>
+                            {% endif %}
+                        {% endif %}
+                </div>
+            </div>
+            <div class="bg-light p-4 d-flex justify-content-end text-center">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                    </li>
+                    <div class="followers_section mt-2" title="View connections">
+                        <a class="view_followers" href="{% url 'view_followers' curr_user %}">
+                            <small><i class="fas fa-users"></i>&nbsp;<b>{{ no_of_followers }}</b> follower{{ no_of_followers|pluralize }}</small>&nbsp;<small>| <b>{{ no_of_following }}</b>
+                        following</small>
+                    </a>
+                </ul>
+            </div>
+            {% comment %} <div class="px-4 py-3">
+                <h5 class="mb-0">About</h5>
+                <div class="p-4 rounded shadow-sm bg-light">
+                    <p class="font-italic mb-0">
+                        Web Developer
+                    </p>
+                    <p class="font-italic mb-0">
+                        Lives in New York
+                    </p>
+                    <p class="font-italic mb-0">
+                        Photographer
+                    </p>
+                </div>
+            </div> {% endcomment %}
+            <div class="py-4 px-4">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="mb-0">Recent photos</h5>
+                    <a href="#" class="btn btn-link text-muted"></a>
+                </div>
+                <ul>
+                {% for blog in user_blogs %}
+                    <li>
+                        <a href="{% url 'view_post' blog.pk blog.slug %}">{{ blog.title }}</a> <hr>
+                    </li>
+                {% endfor %}
+            </ul>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock content %}
